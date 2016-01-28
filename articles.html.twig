@@ -1,0 +1,56 @@
+{% extends "_layouts/default.html.twig" %}
+
+{% block content %}
+
+{% if articles != null %}
+  <div class="row">
+    {% for article in articles %}
+        <div class="col-md-4 portfolio-item">
+            <div class="thumbnail">
+            <!-- <img class="img-responsive" src="//placehold.it/700x400" alt="{{ article.title|title }}" /> -->
+                <div class="caption">
+                    <h1>
+                        {{ article.title|title }}
+                        <br>
+                        <small>{{ article.subtitle|title }}</small>
+                    </h1>
+                    <p class="description">Date: {{ article.date|date('d/m/y') }}</p>
+                    <p class="description text-justify">Abstract: {{ article.abstract|md2html }}</p>
+                    <p class="note">Category: {{ article.codeCategory.name }}</p>
+                    <p>
+                        <a href="{{ url('importArticle', id: article.id }) }}"
+                           class="btn btn-block btn-success" role="button">Read</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+  </div>
+
+  <div class="row text-center">
+      <div class="col-lg-12">
+          <ul class="pagination">
+              {% for i in pages %}
+                {% if currentLoadMore == i %}
+                  <li class="active">
+                    <a href="{{ path('general_articles_category', { categoria: currentCategory, loadmore: i }) }}">
+                      {{ i }}
+                </a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a href="{{ path('general_articles_category', { categoria: currentCategory, loadmore: i }) }}">
+                      {{ i }}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+          </ul>
+      </div>
+  </div>
+
+{% else %}
+  <p class="description">We couldnt load articles from this category yet.</p>
+{% endif %}
+
+{% endblock %}
