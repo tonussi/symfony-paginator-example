@@ -31,10 +31,10 @@ right bellow the article's set.
       				</h1>
       				<p class="description">Date: {{ article.date|date('d/m/y') }}</p>
       				<p class="description text-justify">Abstract: {{ article.abstract|md2html }}</p>
-      				<p class="note">Category: {{ article.codeCategory.nome }}</p>
+      				<p class="note">Category: {{ article.codeCategory.name }}</p>
       				<p>
       					<a href="{{ url('importArticle', id: article.id }) }}"
-      						 class="btn btn-block btn-success" role="button">Read</a>
+      					   class="btn btn-block btn-success" role="button">Read</a>
       				</p>
       			</div>
       		</div>
@@ -48,15 +48,15 @@ right bellow the article's set.
               {% for i in pages %}
                 {% if currentLoadMore == i %}
                   <li class="active">
-                    <a href="{{ path('importArticleByCategoryLoadMoreONe', { categoria: currentCategory, loadmore: i }) }}">
+                    <a href="{{ path('general_articles_category', { categoria: currentCategory, loadmore: i }) }}">
                       {{ i }}
-      						  </a>
+      		    </a>
                   </li>
                 {% else %}
                   <li>
-                    <a href="{{ path('importArticleByCategoryLoadMoreONe', { categoria: currentCategory, loadmore: i }) }}">
+                    <a href="{{ path('general_articles_category', { categoria: currentCategory, loadmore: i }) }}">
                       {{ i }}
-      						  </a>
+      	            </a>
                   </li>
                 {% endif %}
               {% endfor %}
@@ -89,7 +89,7 @@ public function showGeneralArticlesAction($category, $loadmore)
     $articles = $this->getDoctrine()
                      ->getRepository('AppBundle:Publication')
                      ->findBy(array('codeCategory' => $category,
-                                    'articleState' => 'VISIVEL'), array('id' => 'DESC'), $loadmore, 0);
+                                    'articleState' => 'VISIBLE'), array('id' => 'DESC'), $loadmore, 0);
 
     $countHowMuchArticlesOnThisCategory = count($articles);
     $pagesArray = array();
