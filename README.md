@@ -78,7 +78,7 @@ maps a simple route that works with 2 parameters, the first one is category and 
 second one is the loadmore parameter. Now just what you have to do is work if these
 parameters in the presentation layer showing for the user the ways to see articles.
 
-```
+``` php
 /**
  * @Route("/category", name="general_articles", defaults={"loadmore" = 2, "category" = 1})
  * @Route("/category/", name="general_articles", defaults={"loadmore" = 2, "category" = 1})
