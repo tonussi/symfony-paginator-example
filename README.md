@@ -88,8 +88,8 @@ public function showGeneralArticlesAction($category, $loadmore)
 {
     $articles = $this->getDoctrine()
                      ->getRepository('AppBundle:Publication')
-                     ->findBy(array('codCategoria' => $category,
-                                    'estadoArtigo' => 'VISIVEL'), array('id' => 'DESC'), $loadmore, 0);
+                     ->findBy(array('codeCategory' => $category,
+                                    'articleState' => 'VISIVEL'), array('id' => 'DESC'), $loadmore, 0);
 
     $countHowMuchArticlesOnThisCategory = count($articles);
     $pagesArray = array();
